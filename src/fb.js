@@ -3,13 +3,16 @@
 const rp = require('request-promise');
 const Promise = require('bluebird');
 
-/**
- * @param options { accessToken }
- * @returns Promise
- */
+let pageID = '2910681209183952 '
+//let accessToken ='EAApXP8eHHtABAKa4gb9xQfK16Lv1oKrP0Qd8KZBZCRsQ81XnZCj6WRYKHvCNLOYxzEOz89K9sH9Y6uZCt3AoD3lynHvtwbhboDWSoLOE4FkbUfueVZC1CuVN8jQ8BzZA3K96qab9HBcSeIw0F8GP0D9iHItC3Fq5WnBAJoMT2WgBlxXd5n7dvH'
+ /**
+  * @param options { accessToken }
+  * @returns Promise
+  */
+
 exports.startLiveVideo = function startLiveVideo(options) {
   return rp({
-    uri: 'https://graph.facebook.com/v2.8/me/live_videos'
+    uri: 'https://graph.facebook.com/v12.0/me/live_videos'
     + '?access_token=' + options.accessToken,
     method: 'POST',
     json: options,
@@ -25,7 +28,7 @@ exports.startLiveVideo = function startLiveVideo(options) {
  */
 exports.getLiveVideo = function getLiveVideo(options) {
   return rp({
-    uri: 'https://graph.facebook.com/v2.8/' + options.postId
+    uri: 'https://graph.facebook.com/v12.0/' + options.postId
     + '?access_token=' + options.accessToken,
     method: 'GET',
     json: true
@@ -38,7 +41,7 @@ exports.getLiveVideo = function getLiveVideo(options) {
  */
 exports.deleteLiveVideo = function deleteLiveVideo(options) {
   return rp({
-    uri: 'https://graph.facebook.com/v2.8/' + options.postId
+    uri: 'https://graph.facebook.com/v12.0/' + options.postId
     + '?access_token=' + options.accessToken,
     method: 'DELETE',
     json: true
@@ -51,7 +54,7 @@ exports.deleteLiveVideo = function deleteLiveVideo(options) {
  */
 exports.endLiveVideo = function endLiveVideo(options) {
   return rp({
-    uri: 'https://graph.facebook.com/v2.8/' + options.postId
+    uri: 'https://graph.facebook.com/v12.0/' + options.postId
     + '?end_live_video=true'
     + '&access_token=' + options.accessToken,
     method: 'POST',
@@ -65,7 +68,7 @@ exports.endLiveVideo = function endLiveVideo(options) {
  */
 exports.getAllLiveVideos = function getAllLiveVideos(options) {
   return rp({
-    uri: 'https://graph.facebook.com/v2.8/me/live_videos'
+    uri: 'https://graph.facebook.com/v12.0/me/live_videos'
     + '?access_token=' + options.accessToken,
     method: 'GET',
     json: true

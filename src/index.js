@@ -35,10 +35,10 @@ function start() {
   };
   fb.startLiveVideo({
     accessToken,
-    title: 'Live Video',
-    // privacy: "{'value':'EVERYONE'}"
+    title: 'Live VideoTEST',
+    privacy: "{'value':'EVERYONE'}"
     // privacy: "{'value':'FRIENDS'}"
-    privacy: privacys[privacy] || "{'value':'CUSTOM',allow:'100009508046151,1751806573'}",
+    //privacy: privacys[privacy] || "{'value':'CUSTOM',allow:'100009508046151,1751806573'}",
   })
     .then((liveVideo) => {
       console.log(liveVideo);
@@ -56,14 +56,14 @@ function start() {
       // stream to facebook; -s size should be the same as in scraper.js
       // TODO: ffmpeg is drops down to ~11fps and is not keeping the 30fps (facebooks minimum fps to show the video)
       cmd = 'phantomjs --web-security=no ' + __dirname + '/scraper.js "' + url + '" ' +
-        // '| ffmpeg -y -c:v png -f image2pipe -r ' + fps + ' -i - -c:v libx264 -s 1280x720 -pix_fmt yuv420p -r ' + fps + ' -f flv "' + rtmpUrl + '" >> stream.log 2>&1';
+        '| ffmpeg -y -c:v png -f image2pipe -r ' + fps + ' -i - -c:v libx264 -s 1280x720 -pix_fmt yuv420p -r ' + fps + ' -f flv "' + rtmpUrl + '" >> stream.log 2>&1';
         // '| ffmpeg -y -c:v png -f image2pipe -i - -c:v libx264 -s 1280x720 -pix_fmt yuv420p -vf "fps=30" -f flv "' + rtmpUrl + '" >> stream.log 2>&1';
         // '| ffmpeg -y -c:v png -f image2pipe -i - -c:v libx264 -pix_fmt yuv420p -vf "fps=30" -f flv "' + rtmpUrl + '" >> stream.log 2>&1';
         '| ffmpeg -threads 0 -y -v verbose -c:v png -r ' + fps + ' -f image2pipe -i - -f lavfi -i anullsrc -acodec aac -ac 1 -ar 44100 -b:a 128k -c:v libx264 -s 1280x720 -pix_fmt yuv420p -f flv "' + rtmpUrl + '" >> stream.log 2>&1';
       // '| ffmpeg -y -c:v png -f image2pipe -r ' + fps + ' -i - -b 4000k -minrate 4000k -maxrate 4000k -bufsize 1835k -c:v libx264 -s 1280x720 -pix_fmt yuv420p -f flv "' + rtmpUrl + '" >> stream.log 2>&1';
       // ^^^^
       // worse tests:
-      // cmd = 'phantomjs --web-security=no scraper.js "' + url + '" | ffmpeg -y -c:v png -f image2pipe -r ' + fps + ' -i - -c:v libx264 -profile:v baseline -maxfps 200000 -bufsize 200000 -level 3.1 -pix_fmt yuv420p -f flv "' + rtmpUrl + '" >> stream.log 2>&1';
+       cmd = 'phantomjs --web-security=no scraper.js "' + url + '" | ffmpeg -y -c:v png -f image2pipe -r ' + fps + ' -i - -c:v libx264 -profile:v baseline -maxfps 200000 -bufsize 200000 -level 3.1 -pix_fmt yuv420p -f flv "' + rtmpUrl + '" >> stream.log 2>&1';
       // cmd = 'phantomjs --web-security=no scraper.js "' + url + '" | ffmpeg -y -c:v png -f image2pipe -r ' + fps + ' -i - -c:v libx264 -pix_fmt yuv420p -f flv "' + rtmpUrl + '" >> stream.log 2>&1';
       // cmd = 'phantomjs --web-security=no ' + __dirname + '/scraper.js "' + url + '" | ffmpeg -y -c:v png -f image2pipe -r ' + fps + ' -i - -c:v libx264 -s 960x540 -pix_fmt yuv420p -f flv "' + rtmpUrl + '" >> stream.log 2>&1';
 
